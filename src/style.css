@@ -1,0 +1,43 @@
+:root {
+    --primary-green: #176B43;
+    --light-green: #F0F8F2;
+    --soft-green: #DCEBE0;
+    --white: #FFFFFF;
+    --text-color: #26382D;
+}
+body {
+    background-color: var(--light-green);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+}
+.carte-eleve {
+    background-color: var(--white);
+    padding: 24px;
+    border-radius: 16px;
+    border-left: 5px solid var(--primary-green);
+    margin-bottom: 16px;
+    box-shadow: 0 4px 12px rgba(23, 107, 67, 0.10);
+    transition: 0.3s ease;
+}
+
+.carte-eleve:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(23, 107, 67, 0.16);
+}
+#liste-eleves {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+.carte-eleve h3 {
+    color: var(--primary-green);
+    font-size: 18px;
+    margin-bottom: 16px;
+}
+
+.carte-eleve p {
+    color: var(--text-color);
+    font-size: 15px;
+    padding: 8px 0;
+    border-top: 1px solid var(--soft-green);
+}
