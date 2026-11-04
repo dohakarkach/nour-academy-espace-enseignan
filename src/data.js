@@ -5,16 +5,12 @@ const groupes = [
         nom: "2e Bac Sciences Mathématiques",
         cours: "Mathématiques"
     },
-    {
+    { 
         id: 2,
         nom: "1er Bac Sciences Physiques",
         cours: "Physique"
     },
-    {
-        id: 3,
-        nom: "Tronc Commun",
-        cours: "Français"
-    }
+
 ];
 
 const eleves = [

@@ -41,3 +41,12 @@ body {
     padding: 8px 0;
     border-top: 1px solid var(--soft-green);
 }
+.alerte{
+   background-color: rgb(199, 7, 7);
+    color: white;
+  width: 100px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    font-weight: bold;
+}
