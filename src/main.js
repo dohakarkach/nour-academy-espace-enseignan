@@ -7,16 +7,76 @@ let compteur = document.querySelector("#compteur");
 function creerLigne (eleve){
   
  let ligne = document.createElement("li"); 
+ ligne.dataset.id = eleve.id
+ ligne.dataset.groupeId = eleve.groupeId
 ligne.classList.add("carte-eleve");
 let nom = document.createElement("h3");
 nom.textContent = "Nom complet : " + eleve.nom + " " + eleve.prenom;
 ligne.appendChild (nom);
 let absence = document.createElement("p")
-absence.textContent= "Absences : " + eleve.absences;
+absence.textContent ="Absence " +  eleve.absences;
+let message = document.createElement("span");
+
+message.textContent = "Prévenir les parents";
+message.classList.add("message-alerte");
 if(eleve.absences >= 3){
   absence.classList.add("alerte");
+  ligne.appendChild(message);
 }
 ligne.appendChild(absence)
+let actions = document.createElement("div");
+actions.classList.add("actions");
+
+let btnAjouter = document.createElement("button");
+btnAjouter.textContent = "ajouter la note";
+btnAjouter.classList.add("btn-Ajouter");
+let input = document.createElement("input");
+let erreurNote = document.createElement("p");
+erreurNote.classList.add("erreur-note");
+actions.appendChild(erreurNote);
+input.classList.add("input");
+input.type = "number";
+input.min ="0";
+input.max ="20";
+actions.appendChild(input);
+btnAjouter.addEventListener("click",()=>{
+   let nouvelleNote = Number(input.value);
+   if(input.value === "" || input.value < 0 || input.value > 20){
+erreurNote.textContent = "Veuillez entrer une note entre 0 et 20";
+return;
+   }
+   eleve.notes.push(nouvelleNote);
+   let total = eleve.notes.reduce((acc, note) => {
+    return acc + note;
+}, 0);
+let resultat = total / eleve.notes.length;
+  moyenne.textContent = "Moyenne : " + resultat.toFixed(2) + " / 20";
+
+    input.value = "";
+})
+let btnAbsent = document.createElement("button");
+btnAbsent.textContent = "Absent";
+btnAbsent.classList.add("btn-Absent");
+
+btnAbsent.addEventListener("click", () => {
+
+    eleve.absences++;
+
+    absence.textContent = "Absence " + eleve.absences;
+
+    if (eleve.absences >= 3) {
+        absence.classList.add("alerte");
+
+        if (!ligne.contains(message)) {
+            ligne.appendChild(message);
+        }
+    }
+
+});
+actions.appendChild(btnAjouter);
+actions.appendChild(btnAbsent);
+
+ligne.appendChild(actions);
 let moyenne = document.createElement("p");
 if(eleve.notes.length===0){moyenne.textContent="Moyenne : -"}
 else{
@@ -56,7 +116,7 @@ section.addEventListener("change", () => {
 
     let resultat;
 
-    if (optionFiltrer === "tous") {
+    if (optionFiltrer === "Tous les groupes") {
         resultat = eleves;
     } else {
         resultat = eleves.filter((eleve) => {
@@ -95,3 +155,4 @@ input.addEventListener("input", () => {
 
     compteur.textContent = resultat.length + " élèves";
 });
+
