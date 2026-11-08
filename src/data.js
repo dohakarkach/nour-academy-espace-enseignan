@@ -108,7 +108,7 @@ const eleves = [
         id: 11,
         prenom: "Lina",
         nom: "Saidi",
-        groupeId: 3,
+        groupeId: 1,
         telephoneParent: "0612349876",
         absences: 1,
         notes: [15, 16, 17]
@@ -117,7 +117,7 @@ const eleves = [
         id: 12,
         prenom: "Mehdi",
         nom: "Bennani",
-        groupeId: 3,
+        groupeId: 2,
         telephoneParent: "0676543210",
         absences: 3,
         notes: [10, 12, 11]
@@ -126,7 +126,7 @@ const eleves = [
         id: 13,
         prenom: "Aya",
         nom: "Mansouri",
-        groupeId: 3,
+        groupeId: 1,
         telephoneParent: "0623456780",
         absences: 0,
         notes: [18, 17, 19]
@@ -135,7 +135,7 @@ const eleves = [
         id: 14,
         prenom: "Rayan",
         nom: "Tazi",
-        groupeId: 3,
+        groupeId: 2,
         telephoneParent: "0698765431",
         absences: 2,
         notes: []
@@ -144,7 +144,7 @@ const eleves = [
         id: 15,
         prenom: "Hiba",
         nom: "Ait Ali",
-        groupeId: 3,
+        groupeId: 1,
         telephoneParent: "0656789012",
         absences: 1,
         notes: [13, 14, 15]

@@ -20,7 +20,7 @@ let message = document.createElement("span");
 message.textContent = "Prévenir les parents";
 message.classList.add("message-alerte");
 if(eleve.absences >= 3){
-  absence.classList.add("alerte");
+  ligne.classList.add("alerte");
   ligne.appendChild(message);
 }
 ligne.appendChild(absence)
@@ -65,7 +65,7 @@ btnAbsent.addEventListener("click", () => {
     absence.textContent = "Absence " + eleve.absences;
 
     if (eleve.absences >= 3) {
-        absence.classList.add("alerte");
+        ligne.classList.add("alerte");
 
         if (!ligne.contains(message)) {
             ligne.appendChild(message);
@@ -116,7 +116,7 @@ section.addEventListener("change", () => {
 
     let resultat;
 
-    if (optionFiltrer === "Tous les groupes") {
+    if (optionFiltrer === "") {
         resultat = eleves;
     } else {
         resultat = eleves.filter((eleve) => {
@@ -155,4 +155,125 @@ input.addEventListener("input", () => {
 
     compteur.textContent = resultat.length + " élèves";
 });
+let form = document . getElementById("form-eleve");
+let inputPrenom = document.getElementById("prenom");
+let inputNom = document.getElementById("nom");
+let prenomMessage = document.getElementById("prenom-msg");
+let nomMessage = document.getElementById("nom-msg");
+let grp = document.getElementById("groupe");
+let grpMessage = document.getElementById("groupe-msg");
+let email = document.getElementById("email");
+let EmailMessage = document.getElementById("email-msg");
+let telephone = document.getElementById("telephone");
+let telephoneMessage = document.getElementById("telephone-msg");
+let succesMessage = document.getElementById("form-succes");
+let erreurMessage = document.getElementById("form-erreur");
+let inputCode = document.getElementById("code");
+let codeMessage = document.getElementById("code-msg");
+const regexPrenom = /^[A-Za-zÀ-ÿ\s-]{2,}$/;
+const regexNom = /^[A-Za-zÀ-ÿ\s-]{2,}$/;
+const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
 
+const regexTelephone = /^(0[67]\d{8}|\+212[67]\d{8})$/;
+
+const regexCode = /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+const champPrenom = inputPrenom.parentElement;
+ inputPrenom.addEventListener("input",()=>{
+    if ( regexPrenom.test(inputPrenom.value))
+    {champPrenom.classList.remove("erreur");
+        champPrenom.classList.add("valide");
+        prenomMessage .textContent ="Prénom valide"
+    }
+    else  {
+        champPrenom.classList.remove("valide");
+        champPrenom.classList.add("erreur");
+        prenomMessage.textContent = "2 caractères minimum : lettres, espaces ou tirets";
+    }
+ })
+ const champNom = inputNom.parentElement;
+ inputNom.addEventListener("input",()=>{
+    if ( regexNom.test(inputNom.value))
+    {champNom.classList.remove("erreur");
+        champNom.classList.add("valide");
+        nomMessage .textContent ="Nom valide"
+    }
+    else  {
+        champNom.classList.remove("valide");
+        champNom.classList.add("erreur");
+        nomMessage.textContent = "2 caractères minimum : lettres, espaces ou tirets";
+    }
+ })
+  const champEmail = email.parentElement;
+ email.addEventListener("input",()=>{
+    if ( regexEmail.test(email.value))
+    {champEmail.classList.remove("erreur");
+        champEmail.classList.add("valide");
+        EmailMessage .textContent ="Email validé"
+    }
+    else  {
+        champEmail.classList.remove("valide");
+        champEmail.classList.add("erreur");
+        EmailMessage.textContent = "Veuillez saisir une adresse email valide";
+    }
+ })
+ const champTelephone = telephone.parentElement;
+telephone.addEventListener("input", () => {
+if (regexTelephone.test(telephone.value)) {
+champTelephone.classList.remove("erreur");
+champTelephone.classList.add("valide");
+telephoneMessage.textContent = "Téléphone valide.";
+} else {
+champTelephone.classList.remove("valide");
+champTelephone.classList.add("erreur");
+telephoneMessage.textContent = "Format invalide. Exemple : 0612345678 ou +212612345678.";
+
+}
+
+});form.addEventListener("submit",(event)=>{
+
+    event.preventDefault();
+  let existe = eleves.some((eleve)=>{
+return eleve.prenom === inputPrenom.value && 
+eleve.nom === inputNom.value;
+});  
+if(existe  ) {  erreurMessage.textContent = "Cet élève existe déjà";
+    return;
+}
+else{
+let Neweleve ={
+    id : eleves.length + 1,
+
+            prenom: inputPrenom.value,
+            nom: inputNom.value,
+            groupeId: Number(grp.value),
+            telephoneParent: telephone.value,
+            absences: 0,
+            notes: []
+};
+eleves.push(Neweleve);
+
+let nouvelleLigne = creerLigne(Neweleve);
+listeEleves.appendChild(nouvelleLigne);
+compteur.textContent = eleves.length + " élèves";
+
+// pour vider le form
+
+form.reset();
+
+
+
+
+
+
+}
+
+
+
+
+
+});
+let bilanTitre = document.getElementById("titre-bilan");
+let BilanMoyenne = document.getElementById("bilan-moyenne");
+let bilanAbsences = document.getElementById("bilan-absences");
+let bilanAlertes = document.getElementById("bilan-alertes");
+let bilanMeilleur = document.getElementById("bilan-meilleur");

@@ -30,7 +30,21 @@ body {
     transform: translateY(-4px);
     box-shadow: 0 8px 18px rgba(23, 107, 67, 0.16);
 }
+.carte-eleve.alerte {
+    background-color: #ffe0e0;
+    border: 2px solid #c70707;
+    border-left: 5px solid #c70707;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    border-radius: 16px;
+    color: var(--text-color);
+}
 
+.carte-eleve.alerte h3 {
+    color: #c70707;
+}
 #liste-eleves {
     list-style: none;
     padding: 0;
@@ -51,7 +65,7 @@ body {
 }
 
 .alerte {
-    background-color: rgb(199, 7, 7);
+      background-color: rgb(199, 7, 7);
     color: white;
     width: 100px;
     padding: 6px 12px;
