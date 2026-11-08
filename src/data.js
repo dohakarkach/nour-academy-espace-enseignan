@@ -149,6 +149,7 @@ const eleves = [
         absences: 1,
         notes: [13, 14, 15]
     }
+    
 ];
 
 export { groupes, eleves };

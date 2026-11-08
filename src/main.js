@@ -1,7 +1,7 @@
 import './style.css'
 import { eleves, groupes } from './data.js'
 let listeEleves = document.querySelector("#liste-eleves"); 
-
+let listeParents = document.getElementById("liste-parents");
 let compteur = document.querySelector("#compteur");
 let bilanTitre = document.getElementById("titre-bilan");
 let BilanMoyenne = document.getElementById("bilan-moyenne");
@@ -153,6 +153,63 @@ return true
     }
 })
  bilanAlertes.textContent = elevesAlertes.length ;
+ listeParents.innerHTML = "";
+
+elevesAlertes.forEach((eleve) => {
+    let li = document.createElement("li");
+
+    li.textContent = eleve.nom + " " + eleve.prenom +
+        " — Téléphone : " + eleve.telephoneParent;
+
+    listeParents.appendChild(li);
+    // Moyenne générale
+let elevesAvecNotes = resultat.filter((eleve) => {
+    return eleve.notes.length > 0;
+});
+
+if (elevesAvecNotes.length === 0) {
+    BilanMoyenne.textContent = "Aucune moyenne";
+} else {
+    let total = 0;
+
+    elevesAvecNotes.forEach((eleve) => {
+        let somme = eleve.notes.reduce((acc, note) => {
+            return acc + note;
+        }, 0);
+
+        let moyenne = somme / eleve.notes.length;
+
+        total = total + moyenne;
+    });
+
+    let moyenneGenerale = total / elevesAvecNotes.length;
+
+    BilanMoyenne.textContent = moyenneGenerale.toFixed(2) + " / 20";
+}
+
+// Meilleure moyenne
+if (elevesAvecNotes.length === 0) {
+    bilanMeilleur.textContent = "Aucun élève";
+} else {
+    let meilleureMoyenne = 0;
+    let meilleurEleve = "";
+
+    elevesAvecNotes.forEach((eleve) => {
+        let somme = eleve.notes.reduce((acc, note) => {
+            return acc + note;
+        }, 0);
+
+        let moyenne = somme / eleve.notes.length;
+
+        if (moyenne > meilleureMoyenne) {
+            meilleureMoyenne = moyenne;
+            meilleurEleve = eleve.prenom + " " + eleve.nom;
+        }
+    });
+
+    bilanMeilleur.textContent = meilleurEleve + " : " + meilleureMoyenne.toFixed(2) + " / 20";
+}
+});
 });
 
 input.addEventListener("input", () => {
