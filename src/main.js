@@ -98,21 +98,7 @@ let lignes = eleves.map(creerLigne); // [li, li, li ]
 // les lignes dans la liste html
 listeEleves.append(...lignes); // li, li,  li, ...
 
-compteur.textContent = resultat.length + " élèves";
-let totalAbsences = resultat.reduce((acc,eleve)=>{
-    return acc + eleve.absences
-},0);
-bilanAbsences.textContent = totalAbsences+ "absences";
-let elevesAlertes = 
-resultat.filter((eleve)=>{
-    if(eleve.absences>= 3){
-return true
-    }
-    else{
-        return false
-    }
-})
- bilanAlertes.textContent = elevesAlertes.length ;
+
 // let page = document.getElementById("page");
 // une boucle pour les options dans les  select
 // Récupérer les éléments HTML
@@ -153,6 +139,20 @@ section.addEventListener("change", () => {
 
     // Mettre à jour le compteur
     compteur.textContent = resultat.length + " élèves";
+    let totalAbsences = resultat.reduce((acc,eleve)=>{
+    return acc + eleve.absences
+},0);
+bilanAbsences.textContent = totalAbsences+"absences";
+let elevesAlertes = 
+resultat.filter((eleve)=>{
+    if(eleve.absences>= 3){
+return true
+    }
+    else{
+        return false
+    }
+})
+ bilanAlertes.textContent = elevesAlertes.length ;
 });
 
 input.addEventListener("input", () => {
