@@ -3,6 +3,11 @@ import { eleves, groupes } from './data.js'
 let listeEleves = document.querySelector("#liste-eleves"); 
 
 let compteur = document.querySelector("#compteur");
+let bilanTitre = document.getElementById("titre-bilan");
+let BilanMoyenne = document.getElementById("bilan-moyenne");
+let bilanAbsences = document.getElementById("bilan-absences");
+let bilanAlertes = document.getElementById("bilan-alertes");
+let bilanMeilleur = document.getElementById("bilan-meilleur");
 
 function creerLigne (eleve){
   
@@ -93,8 +98,21 @@ let lignes = eleves.map(creerLigne); // [li, li, li ]
 // les lignes dans la liste html
 listeEleves.append(...lignes); // li, li,  li, ...
 
-compteur.textContent = eleves.length + " élèves";
-
+compteur.textContent = resultat.length + " élèves";
+let totalAbsences = resultat.reduce((acc,eleve)=>{
+    return acc + eleve.absences
+},0);
+bilanAbsences.textContent = totalAbsences+ "absences";
+let elevesAlertes = 
+resultat.filter((eleve)=>{
+    if(eleve.absences>= 3){
+return true
+    }
+    else{
+        return false
+    }
+})
+ bilanAlertes.textContent = elevesAlertes.length ;
 // let page = document.getElementById("page");
 // une boucle pour les options dans les  select
 // Récupérer les éléments HTML
@@ -272,8 +290,3 @@ form.reset();
 
 
 });
-let bilanTitre = document.getElementById("titre-bilan");
-let BilanMoyenne = document.getElementById("bilan-moyenne");
-let bilanAbsences = document.getElementById("bilan-absences");
-let bilanAlertes = document.getElementById("bilan-alertes");
-let bilanMeilleur = document.getElementById("bilan-meilleur");
